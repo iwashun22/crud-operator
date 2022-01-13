@@ -2,7 +2,7 @@
   "name": "@crud/simple",
   "version": "1.0.0",
   "description": "make a simple CRUD operator",
-  "main": "./dist/index.bundle.js",
+  "main": "./lib/index.js",
   "repository": "git@github.com:iwashun22/npm-simple-crud.git",
   "author": "Shun Iwashita <iwashunabc519@gmail.com>",
   "license": "MIT",
@@ -16,5 +16,8 @@
     "webpack": "^5.66.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3"
+  },
+  "dependencies": {
+    "webpack-node-externals": "^3.0.0"
   }
 }
