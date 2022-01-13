@@ -1,11 +1,9 @@
 interface property {
-   id: ( string | number ),
+   id: string | number,
    others?: any
 }
 
-type functionInteract = ( { id, ...others } : property) => {
-   object: object
-};
+type functionInteract = ( { id, ...others } : property) => object;
 
 declare class SimpleCRUD {
    constructor(requiredProps?: string[], defaultValu?: object[], strictMode?: boolean);

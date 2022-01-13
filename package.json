@@ -1,5 +1,5 @@
 {
-  "name": "@crud/simple",
+  "name": "simple-crud",
   "version": "1.0.0",
   "description": "make a simple CRUD operator",
   "main": "./lib/index.js",
