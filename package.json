@@ -7,17 +7,6 @@
   "author": "Shun Iwashita <iwashunabc519@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.8",
-    "babel-loader": "^8.2.3",
-    "webpack": "^5.66.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3"
-  },
-  "dependencies": {
-    "webpack-node-externals": "^3.0.0"
+    "test": "node ./tests/index.test.js"
   }
 }
