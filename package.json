@@ -7,6 +7,7 @@
   "author": "Shun Iwashita <iwashunabc519@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "node ./tests/index.test.js"
+    "test": "node ./tests/index.test.js",
+    "dev": "nodemon ./tests/index.test.js"
   }
 }
