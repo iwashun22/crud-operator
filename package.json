@@ -1,0 +1,20 @@
+{
+  "name": "@crud/simple",
+  "version": "1.0.0",
+  "description": "make a simple CRUD operator",
+  "main": "./dist/index.bundle.js",
+  "repository": "git@github.com:iwashun22/npm-simple-crud.git",
+  "author": "Shun Iwashita <iwashunabc519@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "babel-loader": "^8.2.3",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.3"
+  }
+}
