@@ -2,11 +2,9 @@
 type functionInteract = ( providedObject: { id: (string | number), others: any }) => void;
 
 declare class SimpleCRUD {
-   constructor(requiredProps?: string[], defaultValue?: object[], strictMode?: boolean);
+   constructor(requiredProps?: string[], strictMode?: boolean, defaultValue?: object[]);
    create: (newObject: { id: (number | string)}) => object;
-   read = () => {
-
-   }
+   read: (searchProperty?: object) => object[] | object;
 }
 
 export default SimpleCRUD;
