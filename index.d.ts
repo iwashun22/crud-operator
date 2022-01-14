@@ -1,13 +1,12 @@
-interface property {
-   id: string | number,
-   others?: any
-}
 
-type functionInteract = ( { id, ...others } : property) => object;
+type functionInteract = ( providedObject: { id: (string | number), others: any }) => void;
 
 declare class SimpleCRUD {
-   constructor(requiredProps?: string[], defaultValu?: object[], strictMode?: boolean);
-   create: functionInteract;
+   constructor(requiredProps?: string[], defaultValue?: object[], strictMode?: boolean);
+   create: (newObject: { id: (number | string)}) => object;
+   read = () => {
+
+   }
 }
 
 export default SimpleCRUD;
