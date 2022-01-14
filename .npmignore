@@ -3,3 +3,8 @@ tests
 
 # npm pack
 *.tgz
+
+tsconfig.json
+
+yarn.lock
+package-lock.json

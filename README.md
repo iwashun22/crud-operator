@@ -1,1 +1,1 @@
-# npm-simple-crud
+# simple-crud

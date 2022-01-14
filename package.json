@@ -6,9 +6,14 @@
   "repository": "git@github.com:iwashun22/npm-simple-crud.git",
   "author": "Shun Iwashita <iwashunabc519@gmail.com>",
   "license": "MIT",
-  "types": "index.d.ts",
+  "type": "commonjs",
   "scripts": {
     "test": "node ./tests/index.test.js",
-    "dev": "nodemon ./tests/index.test.js"
+    "dev-test": "nodemon ./tests/index.test.js",
+    "build": "tsc index.ts --declaration",
+    "dev-build": "tsc index.ts --declaration --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.8"
   }
 }
