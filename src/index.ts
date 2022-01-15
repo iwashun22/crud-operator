@@ -125,7 +125,7 @@ class SimpleCRUD {
             let counter: number = 0;
             keys.forEach(key => {
                //@ts-ignore
-               if(object[key].toString().toLowerCase() === deleteProp[key].toString().toLowerCase()) counter++;
+               if(object[key].toString() === deleteProp[key].toString()) counter++;
             })
             if(counter === keys.length){
                indexArr.push(index);
