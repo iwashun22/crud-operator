@@ -3,16 +3,17 @@ const crud = require('../lib/index');
 
 const users = new crud(['name', 'id'], false, [{ name: 'Shun', id: 21423}]);
 
-function separateConsole(stringText) {
-   console.log(stringText);
+function separateConsole(any) {
+   console.log(any);
    console.log('\n========================\n');
 }
 
 users.create({ id: '1bsabcAio2', name: "jack" });
-users.create({ id: 12, name: "john", email: "iwashun@gmail.com" });
+users.create({ id: 12, name: "john", email: "jh@gmail.com" });
 users.create({ id: 13, name: 'John'})
 
-separateConsole(users.read({ name: 'john' }));
+separateConsole(users.read({ name: 'john', id: 12 }));
+separateConsole(users.read({ name: 'John' }));
 separateConsole(users.read());
 
 users.delete({ id: '12' });
