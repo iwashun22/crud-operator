@@ -2,13 +2,13 @@ class SimpleCRUD {
    private requiredProps: string[];
    private containerArray: any[];
    private strictMode: boolean;
-   constructor(requiredProp: string[] = ['name', 'id'], strictMode: boolean = false, defaultData: object[] = []) {
-      const isArray = Array.isArray(requiredProp);
+   constructor(requiredProps: string[] = ['name', 'id'], strictMode: boolean = false, defaultData: object[] = []) {
+      const isArray = Array.isArray(requiredProps);
       if(!isArray) throw new Error(`The constructor's parameter must be an Array`);
-      const hasId = requiredProp.find(propName => propName === 'id');
+      const hasId = requiredProps.find(propName => propName === 'id');
       if(!hasId) throw new Error(`The constructor's Array must contains 'id'`);
-      if(requiredProp.length === 1) throw new Error(`You must put other properties aside an 'id'`);
-      this.requiredProps = [...requiredProp];
+      if(requiredProps.length === 1) throw new Error(`You must put other properties aside an 'id'`);
+      this.requiredProps = [...requiredProps];
       this.containerArray = [];
       this.strictMode = strictMode;
       if(defaultData) {

@@ -2,7 +2,7 @@ declare class SimpleCRUD {
     private requiredProps;
     private containerArray;
     private strictMode;
-    constructor(requiredProp?: string[], strictMode?: boolean, defaultData?: object[]);
+    constructor(requiredProps?: string[], strictMode?: boolean, defaultData?: object[]);
     create: ({ id, ...others }: {
         id: (number | string);
     }) => {};
