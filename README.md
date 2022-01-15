@@ -35,7 +35,7 @@ requiredProps| string[]
 strictMode | boolean
 defaultData | object[]
 
-> ### requiredProps
+> ### `requiredProps`
 
 `requiredProps` is an Array of string. You will provide the properties every objects need to have.
 By default, it will contains `[ 'name', 'id ]`. If you want to make a custom properties, make sure to put `'id'` because it is required to every objects.
@@ -47,9 +47,9 @@ import crud from 'simple-crud';
 const users = new crud();
 ```
 
-> ### strictMode
+> ### `strictMode`
 
 
 
-> ### defaultData
+> ### `defaultData`
 
