@@ -40,12 +40,20 @@ There is only four methods, which are `create`, `read`, `update` and `delete`.
    Every `id` must be the unique value.
    `id` will be stringified.
 
+   > RETURN
+
+   New object you created.
+
 - ### `read`
    Get the object by finding its required properties.
    When there is no argument, it will return all the items in array.
    If there was more than one matched, it will return a filtered array.
 
    If `strictMode = false`, it will match string to both lower-case and upper-case
+
+   > RETURN
+
+   Single object or an array.
 
 - ### `update`
    Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match. But I recommend to use this method by passing `id`.
@@ -56,6 +64,9 @@ There is only four methods, which are `create`, `read`, `update` and `delete`.
 
    ex. `{ name: 'Jack' } !== { name: 'jack' }`
 
+   > RETURN
+
+   Objects that were deleted.
 ```js
 import crud from 'simple-crud';
 
@@ -70,6 +81,10 @@ console.log(users.read());
 // output: 
 //       [{ id: 'qog2b28b', name: 'Jack', optional: 'some random text' },
 //         { id: '179128', name: 'Susan' }]
+
+// This works only when strictMode is false
+// Otherwise you need to pass id instead
+const deletedUser = users.delete({ name: 'Susan'});
 ```
 
 <br/>
