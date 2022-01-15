@@ -6,5 +6,9 @@ tests
 
 tsconfig.json
 
+# packages
 yarn.lock
 package-lock.json
+
+*.js.map
+src

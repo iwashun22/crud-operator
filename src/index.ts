@@ -131,13 +131,11 @@ class SimpleCRUD {
                indexArr.push(index);
             }
          })
-         indexArr.forEach(deleteIndex => {
-            //@ts-ignore
-            deletedObject.push(this.containerArray[deleteIndex]);
-         })
          indexArr.forEach((deleteIndex, deletedIndex) => {
+            //@ts-ignore
+            deletedObject.push(this.containerArray[deleteIndex - deletedIndex]);
             this.containerArray.splice(deleteIndex - deletedIndex, 1)[0];
-         })
+         });
       }
       //@ts-ignore
       return deletedObject;

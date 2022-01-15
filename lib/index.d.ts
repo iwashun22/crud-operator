@@ -11,6 +11,6 @@ declare class SimpleCRUD {
     delete: (deleteProp: {
         id: string | number;
         otherRequiredProps?: string | number;
-    }) => object | object[];
+    }) => object | undefined;
 }
 export default SimpleCRUD;

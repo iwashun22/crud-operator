@@ -1,4 +1,4 @@
-const crud = require('../index');
+const crud = require('../lib/index');
 // import crud from '../index';
 
 const users = new crud(['name', 'id'], false, [{ name: 'Shun', id: 21423}]);

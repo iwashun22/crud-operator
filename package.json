@@ -10,8 +10,8 @@
   "scripts": {
     "test": "node ./tests/index.test.js",
     "dev-test": "nodemon ./tests/index.test.js",
-    "build": "tsc index.ts --declaration",
-    "dev-build": "tsc index.ts --declaration --watch"
+    "build": "tsc -p ./ --declaration",
+    "dev-build": "tsc -p ./ --declaration --watch"
   },
   "devDependencies": {
     "@types/node": "^17.0.8"
