@@ -7,7 +7,7 @@ declare class SimpleCRUD {
         id: (number | string);
     }) => {};
     read: (searchProperty: object) => any;
-    update: () => void;
+    update: (objectToUpdate: object, option: ('set' | 'delete'), updateProp: (object | string[])) => void;
     delete: (deleteProp: {
         id: string | number;
         otherRequiredProps?: string | number;

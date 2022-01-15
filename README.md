@@ -29,18 +29,18 @@ const users = new crud();
 
 ## Methods
 
-There is only four methods, which are `create`, `read`, `update` and `delete`.
+There is only four methods, `create`, `read`, `update` and `delete`.
 
 - ### `create`
    Create new object by passing the required properties
    (by default it will be `name` and `id`).
 
-   > NOTE
+   > **NOTE**
 
    Every `id` must be the unique value.
    `id` will be stringified.
 
-   > RETURN
+   > **RETURN**
 
    New object you created.
 
@@ -49,31 +49,40 @@ There is only four methods, which are `create`, `read`, `update` and `delete`.
    When there is no argument, it will return all the items in array.
    If there was more than one matched, it will return a filtered array.
 
-   If `strictMode = false`, it will match string to both lower-case and upper-case
+   If `strictMode` is `false`, it will match string to both lower-case and upper-case
 
-   > RETURN
+   ex. `{ name: 'john' }` will include `{ name: 'John' }`
+
+   > **RETURN**
 
    Single object or an array.
 
 - ### `update`
    Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match. But I recommend to use this method by passing `id`.
 
+   > **RETURN**
+
+   Nothing (void)
+
 - ### `delete`
-   Delete the object. This is similar to `update`, but it will only just delete. You can delete multiple items by filtering with required properties, when `strictMode = false`.
+   Delete the object. This is similar to `update`. You can delete multiple items by filtering with required properties, when `strictMode = false`.
    The property needs to be exact match.
 
-   ex. `{ name: 'Jack' } !== { name: 'jack' }`
+   ex. `{ name: 'Jack' }` will not include `{ name: 'jack' }`
 
-   > RETURN
+   > **RETURN**
 
    Objects that were deleted.
+
+## Example code
+
 ```js
 import crud from 'simple-crud';
 
 // By default, strictMode is set to false.
 const users = new crud();
 
-// By default, there is required properties of 'name' and 'id' and you need to include when you create new one.
+// By default, there is required properties of 'name' and 'id' and you need to include them.
 users.create({ name: 'Jack', id: 'qog2b28b', optional: 'some random text'});
 users.create({ name: 'Susan', id: 179128 });
 
@@ -83,7 +92,7 @@ console.log(users.read());
 //         { id: '179128', name: 'Susan' }]
 
 // This works only when strictMode is false
-// Otherwise you need to pass id instead
+// Otherwise you need to pass only id
 const deletedUser = users.delete({ name: 'Susan'});
 ```
 
@@ -91,7 +100,7 @@ const deletedUser = users.delete({ name: 'Susan'});
 
 ## Options
 
-In the constructor, you can provide to three options. This will help the project easier to match to your purpose.
+In the constructor, you can provide three options. This will help the project match to your purpose.
 
 `option` | `type`
 -------|------
@@ -101,7 +110,7 @@ defaultData | object[]
 
 <br/>
 
-> ### requiredProps
+- ### **requiredProps**
 
 `requiredProps` is an Array of string. You will provide the properties every objects need to have.
 By default, it will contains `[ 'name', 'id' ]`. If you want to make a custom properties, make sure to put `'id'` because it is required to every objects.
@@ -124,9 +133,19 @@ users.create({ name: 'Luke', id: 'i3gw9h1b', email: 'luke_fakemail@gmail.com'});
 
 <br/>
 
-> ### strictMode
+- ### **strictMode**
 
+By default, this value is set to `false`.
 
+#### Differences
 
-> ### defaultData
+   - **`true`**
+      - Every string needs to be the exact match.
+      - Can not `update`, `delete` other than `id`.
+
+   - **`false`**
+      - Every string will matched both of upper-case and lower-case.
+      - Can `update`, `delete` by any required properties.
+
+- ### **defaultData**
 

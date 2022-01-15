@@ -96,8 +96,43 @@ class SimpleCRUD {
       return searchedArray;
    }
 
-   update = () => {
-
+   update = (objectToUpdate: object, option: ('set' | 'delete'), updateProp: (object | string[])) => {
+      if(this.strictMode) {
+         for(const prop in objectToUpdate) {
+            //@ts-ignore
+            if(prop !== 'id') throw new Error(`You can only update by passing 'id'`);
+         }
+         //@ts-ignore
+         const updateObject = this.containerArray.find(object => object.id === objectToUpdate.id);
+         if(option === 'set') {
+            if(!Array.isArray(updateProp) && typeof updateProp === 'object') {
+               //@ts-ignore
+               if(updateProp.id) throw new Error(`You can not change the 'id'`);
+               for(const prop in updateProp) {
+                  //@ts-ignore
+                  updateObject[prop] = updateProp[prop];
+               }
+            }
+            throw new Error(`To set the properties needs to provide as an object`);
+         }
+         else if(option === 'delete') {
+            if(Array.isArray(updateProp)) {
+               for(const requiredProp of this.requiredProps) {
+                  if(updateProp.find(prop => prop === requiredProp))
+                  throw new Error(`You can not delete required properties`);
+               }
+               for(const prop of updateProp) {
+                  //@ts-ignore
+                  delete objectToUpdate[prop];
+               }
+            }
+            throw new Error(`You can only pass the array of properties' name when you choose option 'delete'`);
+         }
+         else throw new Error(`There is only 'set' and 'delete' options`);
+      }
+      else {
+         
+      }
    }
 
    delete = (deleteProp: { id: string | number, otherRequiredProps?: string |number }) => {
