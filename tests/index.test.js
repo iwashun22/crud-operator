@@ -1,5 +1,5 @@
 const crud = require('../lib/index');
-// import crud from '../index';
+// import crud from '../src/index';
 
 const users = new crud(['name', 'id'], false, [{ name: 'Shun', id: 21423}]);
 
