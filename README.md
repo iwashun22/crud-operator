@@ -30,8 +30,8 @@ const users = new crud();
 ## Methods
 
 There is only four methods, `create`, `read`, `update` and `delete`.
-I will give you the code example, starts from here.
-Those codes are when `strictMode` is `false`
+I will give the code example starts from here.
+Those codes are when the `strictMode` is `false`
 
 ```js
 import crud from 'simple-crud';
@@ -63,7 +63,7 @@ const users = new crud();
 
 - ### `read`
    Get the object by finding its required properties.
-   When there is no argument, it will return all the items in array.
+   When there is no argument, it will return all the items into single array.
    If there was more than one matched, it will return a filtered array.
 
    If `strictMode` is `false`, it will match string to both lower-case and upper-case
@@ -85,18 +85,18 @@ const users = new crud();
    ```
 
 - ### `update`
-   Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id` with strict mode. 
+   Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id`. 
 
-   > **NOTE**
+   **Types**
 
    You need to provide a second parameter of string to specify what type of update you want to do.
 
    - `set` 
-   : Set or change the properties. You can change what ever you want except `id`;
-   In third parameter, you will include the objects to set.
+   : Set or change the properties. You can change what ever you want except `id`.
+   In the third parameter, you will include the objects to set.
    - `remove` 
    : Remove properties. You can remove all properties that are not in required lists.
-   In third parameter, you will include the array of string. Those are the properties name that you want to remove.
+   In the third parameter, you will include the array of string. Those are the properties name that you want to remove.
 
 
    > **RETURN**
@@ -105,7 +105,7 @@ const users = new crud();
 
    *emample*
    ```js
-   // Even though the name Susan was started with a capital 'S' it will matched, when using non-strictMode
+   // Even though the name Susan was started with a capital 'S', it will matched when using non-strictMode
    users.update({ name: 'susan'}, 'delete', ['email', 'age'])
 
    // id needs to be exact same, therefore this code won't work.
@@ -115,11 +115,14 @@ const users = new crud();
 - ### `delete`
    Delete the object. This is similar to `update`. You can delete multiple items by filtering with required properties, when `strictMode = false`.
 
-   ex. `{ name: 'Jack' }` will not include `{ name: 'jack' }`
-
    > **RETURN**
 
    Objects that were deleted.
+
+   *example*
+   ```js
+   
+   ```
 
 ## Example code
 

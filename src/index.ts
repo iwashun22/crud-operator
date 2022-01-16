@@ -250,8 +250,14 @@ class SimpleCRUD {
          this.containerArray.forEach((object, index) => {
             let counter: number = 0;
             keys.forEach(key => {
-               //@ts-ignore
-               if(object[key].toString().toLowerCase() === deleteProp[key].toString().toLowerCase()) counter++;
+               if(key === 'id') {
+                  //@ts-ignore
+                  if(object.id.toString() === deletedProp.id.toString()) counter++;
+               }
+               else{
+                  //@ts-ignore
+                  if(object[key].toString().toLowerCase() === deleteProp[key].toString().toLowerCase()) counter++;
+               }
             })
             if(counter === keys.length){
                indexArr.push(index);
