@@ -30,6 +30,14 @@ const users = new crud();
 ## Methods
 
 There is only four methods, `create`, `read`, `update` and `delete`.
+I will give you the code example, starts from here.
+Those codes are when `strictMode` is `false`
+
+```js
+import crud from 'simple-crud';
+
+const users = new crud();
+```
 
 - ### `create`
    Create new object by passing the required properties
@@ -37,12 +45,21 @@ There is only four methods, `create`, `read`, `update` and `delete`.
 
    > **NOTE**
 
-   Every `id` must be the unique value.
-   `id` will be stringified.
+   - Every `id` must be the unique value.
+   - `id` will be stringified.
+   - When you provide an `id` as an integer number, don't put the 0 infront. It will cause an error.
 
    > **RETURN**
 
    New object you created.
+
+   *example*
+
+   ```js
+   users.create({ id: '123abc', name: 'Peter', age: 21 });
+   users.create({ id: 2189, name: 'Susan', email: 'random@gmail.com', age: 16 }); // this id will get stringified
+   ```
+
 
 - ### `read`
    Get the object by finding its required properties.
@@ -57,16 +74,46 @@ There is only four methods, `create`, `read`, `update` and `delete`.
 
    Single object or an array.
 
+   *example*
+
+   ```js
+   const allUsers = users.read(); // get all the users
+   console.log(allUsers);
+   // output: 
+   //       [{ id: '123abc', name: 'Peter' },
+   //         { id: '2189', name: 'Susan', email: 'random@gmail.com' }]
+   ```
+
 - ### `update`
-   Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match. But I recommend to use this method by passing `id`.
+   Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id` with strict mode. 
+
+   > **NOTE**
+
+   You need to provide a second parameter of string to specify what type of update you want to do.
+
+   - `set` 
+   : Set or change the properties. You can change what ever you want except `id`;
+   In third parameter, you will include the objects to set.
+   - `remove` 
+   : Remove properties. You can remove all properties that are not in required lists.
+   In third parameter, you will include the array of string. Those are the properties name that you want to remove.
+
 
    > **RETURN**
 
    Nothing (void)
 
+   *emample*
+   ```js
+   // Even though the name Susan was started with a capital 'S' it will matched, when using non-strictMode
+   users.update({ name: 'susan'}, 'delete', ['email', 'age'])
+
+   // id needs to be exact same, therefore this code won't work.
+   users.update({ name: 'peter', id: '123ABC'}, 'set', { email: 'Peter_mail@gmail.com', age: 22 });
+   ```
+
 - ### `delete`
    Delete the object. This is similar to `update`. You can delete multiple items by filtering with required properties, when `strictMode = false`.
-   The property needs to be exact match.
 
    ex. `{ name: 'Jack' }` will not include `{ name: 'jack' }`
 
@@ -137,7 +184,7 @@ users.create({ name: 'Luke', id: 'i3gw9h1b', email: 'luke_fakemail@gmail.com'});
 
 By default, this value is set to `false`.
 
-#### Differences
+> #### **Differences**
 
    - **`true`**
       - Every string needs to be the exact match.
@@ -146,6 +193,12 @@ By default, this value is set to `false`.
    - **`false`**
       - Every string will matched both of upper-case and lower-case.
       - Can `update`, `delete` by any required properties.
+
+   > **NOTE**
+
+   When you are using non-strictMode, the string of id won't match in both upper-case and lower-case. Although the id needs to be exact same, it can match number and string.
+
+   ex. {id: 123} === {id: '123'}
 
 - ### **defaultData**
 

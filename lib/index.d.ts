@@ -1,3 +1,5 @@
+declare type SET = 'set';
+declare type REMOVE = 'remove';
 declare class SimpleCRUD {
     private requiredProps;
     private containerArray;
@@ -7,10 +9,11 @@ declare class SimpleCRUD {
         id: (number | string);
     }) => {};
     read: (searchProperty: object) => any;
-    update: (objectToUpdate: object, option: ('set' | 'delete'), updateProp: (object | string[])) => void;
+    update: (objectToUpdate: {
+        id: (string | number);
+    }, option: (SET | REMOVE), updateProp: (object | string[])) => void;
     delete: (deleteProp: {
-        id: string | number;
-        otherRequiredProps?: string | number;
+        id: (string | number);
     }) => object | undefined;
 }
 export default SimpleCRUD;

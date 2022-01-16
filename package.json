@@ -8,8 +8,8 @@
   "license": "MIT",
   "type": "commonjs",
   "scripts": {
-    "test": "node ./tests/index.test.js",
-    "dev-test": "nodemon ./tests/index.test.js",
+    "test": "nodemon ./tests/index.test.js",
+    "test-second": "nodemon ./tests/second.test.js",
     "build": "tsc -p ./ --declaration",
     "dev-build": "tsc -p ./ --declaration --watch"
   },

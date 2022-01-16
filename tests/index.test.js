@@ -20,12 +20,20 @@ users.delete({ id: '12' });
 
 separateConsole(users.read());
 
-users.create({ id: '15', name: 'Susan', email: 'Susan@fake.mail'});
+users.create({ id: 15, name: 'Susan', email: 'Susan@fake.mail'});
 users.create({ id: '29sca2', name: 'jack', 'web-site': 'https://fakeweb.com'});
 users.create({ id: 911028410, name: 'Jack', email: 'jackie@gmail.com'});
 
 separateConsole(users.read());
-
 separateConsole(users.delete({ name: 'Jack' }));
+separateConsole(users.read());
 
+// only update with exact match
+users.update({ name: 'shun' }, 'set', { email: 'iwashun@gmail.com', age: 17});
+
+separateConsole(users.read({ name: 'Shun'}));
+
+users.update({ name: 'Susan' }, 'remove', ['email']);
+
+separateConsole(users.read({ name: 'susan' }));
 separateConsole(users.read());

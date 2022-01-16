@@ -1,3 +1,11 @@
+
+// ****** update() ****** //
+type SET = 'set';
+type REMOVE = 'remove';
+
+const set: SET = 'set';
+const remove: REMOVE = 'remove';
+
 class SimpleCRUD {
    private requiredProps: string[];
    private containerArray: any[];
@@ -33,7 +41,7 @@ class SimpleCRUD {
       // const { id, ...others} = createNew;
       let newObject = {};
       if(!id) throw new Error(`id is required to every object to create`);
-      const existedID = this.containerArray.find(object => object.id === id);
+      const existedID = this.containerArray.find(object => object.id.toString() === id.toString());
       if(existedID) throw new Error(`You can not create new object with same id`);
       //@ts-ignore
       newObject.id = id.toString();
@@ -96,46 +104,129 @@ class SimpleCRUD {
       return searchedArray;
    }
 
-   update = (objectToUpdate: object, option: ('set' | 'delete'), updateProp: (object | string[])) => {
+   update = (objectToUpdate: { id: (string | number) }, option: (SET | REMOVE), updateProp: (object | string[])) => {
+
+   /////////  //////////
+      if(option === set && (Array.isArray(updateProp) || typeof updateProp !== 'object')) 
+         throw new Error(`To set the properties needs to provide as an object`);
+
+      if(option === remove && !Array.isArray(updateProp))
+         throw new Error(`You can only pass the array of properties' name when you choose option 'remove'`);
+
+      if(option !== set && option !== remove) throw new Error(`There is only 'set' and 'delete' options`);
+
+      //@ts-ignore
+      if(option === set && updateProp.id) throw new Error(`You can not change the 'id'`);
+
+      if(option === remove){
+         for(const requiredProp of this.requiredProps) {
+            //@ts-ignore
+            if(updateProp.find(prop => prop === requiredProp))
+            throw new Error(`You can not remove required properties`);
+         }
+      }
+   //////////////////////
+   /// Error handle ///
+
       if(this.strictMode) {
          for(const prop in objectToUpdate) {
             //@ts-ignore
             if(prop !== 'id') throw new Error(`You can only update by passing 'id'`);
          }
          //@ts-ignore
-         const updateObject = this.containerArray.find(object => object.id === objectToUpdate.id);
-         if(option === 'set') {
-            if(!Array.isArray(updateProp) && typeof updateProp === 'object') {
+         const updateObject = this.containerArray.find(object => object.id.toString() === objectToUpdate.id.toString());
+         if(option === set) {
+            //@ts-ignore
+            for(const prop in updateProp) {
                //@ts-ignore
-               if(updateProp.id) throw new Error(`You can not change the 'id'`);
-               for(const prop in updateProp) {
-                  //@ts-ignore
-                  updateObject[prop] = updateProp[prop];
-               }
+               updateObject[prop] = updateProp[prop];
             }
-            throw new Error(`To set the properties needs to provide as an object`);
          }
-         else if(option === 'delete') {
-            if(Array.isArray(updateProp)) {
-               for(const requiredProp of this.requiredProps) {
-                  if(updateProp.find(prop => prop === requiredProp))
-                  throw new Error(`You can not delete required properties`);
-               }
-               for(const prop of updateProp) {
-                  //@ts-ignore
-                  delete objectToUpdate[prop];
-               }
+         else if(option === remove) {
+            //@ts-ignore
+            for(const prop of updateProp) {
+               //@ts-ignore
+               delete objectToUpdate[prop];
             }
-            throw new Error(`You can only pass the array of properties' name when you choose option 'delete'`);
          }
-         else throw new Error(`There is only 'set' and 'delete' options`);
       }
       else {
+         let keys: string[] = [];
+         for(const prop in objectToUpdate) {
+            const requiredProp = this.requiredProps.find(p => p === prop);
+            if(!requiredProp) throw new Error(`You can only pass the required property`);
+            keys.push(prop);
+         }
+         let updateObjects = this.containerArray.filter(object => {
+            let counter: number = 0;
+            //@ts-ignore
+            keys.forEach(key => {
+               if(key === 'id') {
+                  if(object.id.toString() === objectToUpdate.id.toString())
+                  counter++;
+               }
+               else {
+                  //@ts-ignore
+                  if(object[key].toString().toLowerCase() === objectToUpdate[key].toString().toLowerCase())
+                  counter++;
+               }
+            })
+            return counter === keys.length;
+         })
+         if(updateObjects.length === 0) return;
+         if(updateObjects.length === 1) updateObjects = updateObjects[0]; 
+
+         if(option === set) {
+            if(Array.isArray(updateObjects)){
+               updateObjects = updateObjects.map(object => {
+                  for(const prop in updateProp) {
+                     //@ts-ignore
+                     object[prop] = updateProp[prop];
+                  }
+                  return {...object};
+               })
+            }
+            else {
+               for(const prop in updateProp) {
+                  //@ts-ignore
+                  updateObjects[prop] = updateProp[prop];
+               }
+            }
+         }
          
+         else if(option === remove) {
+            if(Array.isArray(updateObjects)) {
+               updateObjects = updateObjects.map(object => {
+                  //@ts-ignore
+                  updateProp.forEach(prop => {
+                     delete object[prop]
+                  })
+                  return {...object};
+               })
+            }
+            else {
+               //@ts-ignore
+               updateProp.forEach(prop => {
+                  delete updateObjects[prop];
+               })
+            }
+         }
+
+         if(Array.isArray(updateObjects)) {
+            updateObjects.forEach(up_object => {
+               const index = this.containerArray.findIndex(object => object.id.toString() === up_object.id.toString());
+               this.containerArray[index] = up_object;
+            })
+         }
+         else {
+            //@ts-ignore
+            const index = this.containerArray.findIndex(object => object.id.toString() === updateObjects.id.toString());
+            this.containerArray[index] = updateObjects;
+         }
       }
    }
 
-   delete = (deleteProp: { id: string | number, otherRequiredProps?: string |number }) => {
+   delete = (deleteProp: { id: (string | number) }) => {
       if(!deleteProp) throw new Error(`You need to pass the id or required properties to delete`);
       let deletedObject: object | object[] = [];
       if(this.strictMode) {
@@ -153,14 +244,14 @@ class SimpleCRUD {
          let indexArr: number[] = [];
          for(const key in deleteProp) {
             const requiredKey = this.requiredProps.find(p => p === key);
-            if(!requiredKey) throw new Error(`You can only delete by required property`);
+            if(!requiredKey) throw new Error(`You can only delete by required properties`);
             keys.push(key);
          }
          this.containerArray.forEach((object, index) => {
             let counter: number = 0;
             keys.forEach(key => {
                //@ts-ignore
-               if(object[key].toString() === deleteProp[key].toString()) counter++;
+               if(object[key].toString().toLowerCase() === deleteProp[key].toString().toLowerCase()) counter++;
             })
             if(counter === keys.length){
                indexArr.push(index);
