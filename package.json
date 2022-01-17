@@ -15,9 +15,7 @@
     "dev-build": "tsc -p ./ --declaration --watch"
   },
   "devDependencies": {
-    "@types/node": "^17.0.8"
-  },
-  "dependencies": {
+    "@types/node": "^17.0.8",
     "node-fetch": "2"
   }
 }
