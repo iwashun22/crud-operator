@@ -1,6 +1,6 @@
 # simple-crud
 
-A simple CRUD operator. Supported both types of commonJS and module.
+A simple CRUD operator. Supported both types of commonJS and ES module.
 
 ## Installation
 
@@ -11,14 +11,14 @@ npm i --save simple-crud
 yarn add simple-crud
 ```
 
-> commonjs
+> commonJS
 ```js
 const crud = require('simple-crud');
 
 const users = new crud();
 ```
 
-> module
+> ES module
 ```js
 import crud from 'simple-crud';
 
@@ -82,10 +82,14 @@ const users = new crud();
    // output: 
    //       [{ id: '123abc', name: 'Peter' },
    //         { id: '2189', name: 'Susan', email: 'random@gmail.com' }]
+
+   console.log(
+      users.read({ name: 'peter' });
+   ) // log only users with name peter (include upper-case)
    ```
 
 - ### `update`
-   Update the object. You can pass any required properties when the option `strictMode = false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id`. 
+   Update the object. You can pass any required properties when the option `strictMode` is `false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id`. 
 
    **Types**
 
@@ -113,7 +117,7 @@ const users = new crud();
    ```
 
 - ### `delete`
-   Delete the object. This is similar to `update`. You can delete multiple items by filtering with required properties, when `strictMode = false`.
+   Delete the object. This is similar to `update`. You can delete multiple items by filtering with required properties, when `strictMode` is `false`.
 
    > **RETURN**
 
@@ -121,7 +125,12 @@ const users = new crud();
 
    *example*
    ```js
-   
+   const deletedUser = users.delete({ id: '123abc' });
+
+   console.log( users.read() ); // only one user left inside the array
+   console.log( users.read({ name: 'peter' }) ); // this will not log anything because there is no user with name peter
+
+   console.log(`${deletedUser.name} has lefted`);
    ```
 
 ## Example code
@@ -160,7 +169,7 @@ defaultData | object[]
 
 <br/>
 
-- ### **requiredProps**
+- ## **requiredProps**
 
 `requiredProps` is an Array of string. You will provide the properties every objects need to have.
 By default, it will contains `[ 'name', 'id' ]`. If you want to make a custom properties, make sure to put `'id'` because it is required to every objects.
@@ -183,7 +192,7 @@ users.create({ name: 'Luke', id: 'i3gw9h1b', email: 'luke_fakemail@gmail.com'});
 
 <br/>
 
-- ### **strictMode**
+- ## **strictMode**
 
 By default, this value is set to `false`.
 
@@ -201,7 +210,26 @@ By default, this value is set to `false`.
 
    When you are using non-strictMode, the string of id won't match in both upper-case and lower-case. Although the id needs to be exact same, it can match number and string.
 
-   ex. {id: 123} === {id: '123'}
+   ex. `{ id: 123 }` will be `{ id: '123' }`
 
-- ### **defaultData**
+<br/>
 
+- ## **defaultData**
+
+You can provide the data what you already had, or the data you fetch. However, those data need to have the required properties.
+
+*example*
+```js
+let users;
+
+async function fetchDataIntoCRUD(url){
+   const data = await fetch(url);
+   const json = await data.json();
+   users = await new crud(['name', 'id'], true, json);
+}
+
+fetchDataIntoCRUD('https://jsonplaceholder.typicode.com/users')
+.then(() => {
+   console.log(users.read());
+})
+```

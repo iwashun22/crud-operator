@@ -10,10 +10,14 @@
   "scripts": {
     "test": "nodemon ./tests/index.test.js",
     "test-second": "nodemon ./tests/second.test.js",
+    "test-third": "nodemon ./tests/third.test.js",
     "build": "tsc -p ./ --declaration",
     "dev-build": "tsc -p ./ --declaration --watch"
   },
   "devDependencies": {
     "@types/node": "^17.0.8"
+  },
+  "dependencies": {
+    "node-fetch": "2"
   }
 }

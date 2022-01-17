@@ -23,7 +23,7 @@ class SimpleCRUD {
          defaultData.forEach(data => {
             for(const prop of this.requiredProps) {
                //@ts-ignore
-               if(!data[prop]) throw new Error(`Data you provided does not have a required properties`);
+               if(!data[prop]) throw new Error(`Data you provided does not have the required properties`);
             }
          })
          defaultData = defaultData.map(data => {
@@ -135,6 +135,7 @@ class SimpleCRUD {
          }
          //@ts-ignore
          const updateObject = this.containerArray.find(object => object.id.toString() === objectToUpdate.id.toString());
+         if(!updateObject) return;
          if(option === set) {
             //@ts-ignore
             for(const prop in updateProp) {
@@ -173,7 +174,7 @@ class SimpleCRUD {
             })
             return counter === keys.length;
          })
-         if(updateObjects.length === 0) return;
+         if(updateObjects.length === 0 || !updateObjects) return;
          if(updateObjects.length === 1) updateObjects = updateObjects[0]; 
 
          if(option === set) {
@@ -263,6 +264,7 @@ class SimpleCRUD {
                indexArr.push(index);
             }
          })
+         if(indexArr.length === 0) return;
          indexArr.forEach((deleteIndex, deletedIndex) => {
             //@ts-ignore
             deletedObject.push(this.containerArray[deleteIndex - deletedIndex]);
