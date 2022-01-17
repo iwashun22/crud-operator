@@ -29,7 +29,7 @@ const users = new crud();
 
 ## Methods
 
-There is only four methods, `create`, `read`, `update` and `delete`.
+There are four methods, `create`, `read`, `update` and `delete`.
 I will give the code example starts from here.
 Those codes are when the `strictMode` is `false`
 
