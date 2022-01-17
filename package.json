@@ -1,6 +1,6 @@
 {
-  "name": "simple-crud",
-  "version": "1.0.0",
+  "name": "crud-operator",
+  "version": "1.0.1",
   "description": "make a simple CRUD operator",
   "main": "./lib/index.js",
   "repository": "git@github.com:iwashun22/npm-simple-crud.git",

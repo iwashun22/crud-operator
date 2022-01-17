@@ -1,4 +1,4 @@
-# simple-crud
+# crud-operator
 
 A simple CRUD operator. Supported both types of commonJS and ES module.
 
