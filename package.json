@@ -1,6 +1,15 @@
 {
   "name": "crud-operator",
   "version": "1.0.2",
+  "keywords": [
+    "crud",
+    "operator",
+    "build",
+    "create",
+    "read",
+    "update",
+    "delete"
+  ],
   "description": "make a simple CRUD operator",
   "main": "./lib/index.js",
   "repository": "git@github.com:iwashun22/npm-simple-crud.git",
