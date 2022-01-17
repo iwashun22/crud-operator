@@ -1,4 +1,4 @@
-# crud-operator
+# crud-operator &middot; ![GitHub license](https://img.shields.io/badge/license-GNU-red.svg) ![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)
 
 A simple CRUD operator. Supported both types of commonJS and ES module.
 
