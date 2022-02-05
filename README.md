@@ -6,7 +6,7 @@ A simple CRUD operator. Supported both types of commonJS and ES module.
 
 ```sh
 # with npm
-npm i --save simple-crud
+npm install --save simple-crud
 # with yarn
 yarn add simple-crud
 ```
@@ -14,14 +14,12 @@ yarn add simple-crud
 > commonJS
 ```js
 const crud = require('simple-crud');
-
 const users = new crud();
 ```
 
 > ES module
 ```js
 import crud from 'simple-crud';
-
 const users = new crud();
 ```
 
@@ -31,7 +29,7 @@ const users = new crud();
 
 There are four methods, `create`, `read`, `update` and `delete`.
 I will give the code example starts from here.
-Those codes are when the `strictMode` is `false`
+These codes are when the `strictMode` is `false`
 
 ```js
 import crud from 'simple-crud';
