@@ -28,7 +28,6 @@ const users = new crud();
 ## Methods
 
 There are four methods, `create`, `read`, `update` and `delete`.
-I will give the code example starts from here.
 These codes are when the `strictMode` is `false`
 
 ```js
@@ -87,7 +86,7 @@ const users = new crud();
    ```
 
 - ### `update`
-   Update the object. You can pass any required properties when the option `strictMode` is `false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id`. 
+   Update the object. You can pass any required properties when the option `strictMode` is `false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, it is better to use this method by passing `id`. 
 
    **Types**
 
