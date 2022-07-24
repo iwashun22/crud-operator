@@ -26,5 +26,8 @@
   "devDependencies": {
     "@types/node": "^17.0.8",
     "node-fetch": "2"
+  },
+  "dependencies": {
+    "jest": "15.0.1"
   }
 }

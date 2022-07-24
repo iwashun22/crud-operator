@@ -1,39 +1,82 @@
 const crud = require('../lib/index');
 // import crud from '../src/index';
 
-const users = new crud(['name', 'id'], false, [{ name: 'Shun', id: 21423}]);
 
-function separateConsole(any) {
-   console.log(any);
-   console.log('\n========================\n');
-}
+////// strict mode
 
-users.create({ id: '1bsabcAio2', name: "jack" });
-users.create({ id: 12, name: "john", email: "jh@gmail.com" });
-users.create({ id: 13, name: 'John'})
+const users_strict = new crud(['name', 'id', 'country']);
 
-separateConsole(users.read({ name: 'john', id: 12 }));
-separateConsole(users.read({ name: 'John' }));
-separateConsole(users.read());
+users_strict.create({ id: 1234, name: 'Josh', country: 'America', email: 'fakejosh@gmail.com' });
+users_strict.create({ id: 9876, name: 'Sally', country: 'Sweden', age: '22' });
+users_strict.create({ id: 'abcd', name: 'Kevin', country: 'South Korea', hobbies: ['basketball', 'programming'], device: 'Mac OS' });
 
-users.delete({ id: '12' });
+describe('\n#### strict mode\n'.toUpperCase(), () => {
+   describe('Method: \n\t#create() \n\t#read()', () => {
+      test('Can create and read the object', () => {
+         expect(users_strict.read({ id: 1234 }).email).toBe('fakejosh@gmail.com');
+      });
+      test('Can read all the objects', () => {
+         expect(users_strict.read().length).toBe(3);
+      })
+   })
 
-separateConsole(users.read());
+   describe('Method: \n\t#update()', () => {
+      test('Can update by setting and creating new properties in an object', () => {
+         users_strict.update({id: '9876'}, 'set', { name: 'Susan', email: 'ss@fakemail.com'});
+         expect(users_strict.read({id: 9876}).name).toBe('Susan');
+      })
+      test('Can delete a property of an object', () => {
+         users_strict.update({id: 'abcd'}, 'remove', ['device']);
+         expect(users_strict.read({id: 'abcd'}).device).toBe(undefined);
+         expect(JSON.stringify(users_strict.read({id: 'abcd'}).hobbies)).toBe(JSON.stringify(['basketball', 'programming']));
+      })
+   })
 
-users.create({ id: 15, name: 'Susan', email: 'Susan@fake.mail'});
-users.create({ id: '29sca2', name: 'jack', 'web-site': 'https://fakeweb.com'});
-users.create({ id: 911028410, name: 'Jack', email: 'jackie@gmail.com'});
+   describe('Method: \n\t#delete()', () => {
+      test('Can delete the object', () => {
+         users_strict.delete({ id: '13' });
+         expect(users_strict.read().length).toBe(3);
+         expect(users_strict.read({ id: '13'})).toBe(undefined);
+      })
+   })
+});
 
-separateConsole(users.read());
-separateConsole(users.delete({ name: 'Jack' }));
-separateConsole(users.read());
 
-// only update with exact match
-users.update({ name: 'shun' }, 'set', { email: 'iwashun@gmail.com', age: 17});
 
-separateConsole(users.read({ name: 'Shun'}));
+////// non-strict mode
 
-users.update({ name: 'Susan' }, 'remove', ['email']);
+const users_no_strict = new crud(['name', 'id'], false, [{ name: 'Shun', id: 21423}]);
 
-separateConsole(users.read({ name: 'susan' }));
-separateConsole(users.read());
+users_no_strict.create({ id: '1bsabcAio2', name: "jack" });
+users_no_strict.create({ id: 12, name: "john", email: "jh@gmail.com" });
+users_no_strict.create({ id: 13, name: 'John'});
+
+describe('\n#### non-strict mode\n'.toUpperCase(), () => {
+   describe('Method: \n\t#create() \n\t#read()', () => {
+      test('Can create and read the object', () => {
+         expect(users_no_strict.read({ name: 'john', id: 12 }).email).toBe('jh@gmail.com');
+      });
+      test('Can read all the objects', () => {
+         expect(users_no_strict.read().length).toBe(4);
+      })
+   })
+
+   describe('Method: \n\t#update()', () => {
+      test('Can update by setting and creating new properties in an object', () => {
+         users_no_strict.update({id: '21423'}, 'set', { name: 'Luke', email: 'lk@fakemail.com'});
+         expect(users_no_strict.read({id: 21423}).name).toBe('Luke');
+      })
+      test('Can delete a property of an object', () => {
+         users_no_strict.update({id: 12}, 'remove', ['email']);
+         expect(users_no_strict.read({id: 12}).email).toBe(undefined);
+      })
+   })
+
+   describe('Method: \n\t#delete()', () => {
+      test('Can delete the object', () => {
+         users_no_strict.delete({ id: '13' });
+         expect(users_no_strict.read().length).toBe(3);
+         expect(users_no_strict.read({name: 'john', id: '13'})).toBe(undefined);
+      })
+   })
+});

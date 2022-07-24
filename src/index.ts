@@ -101,6 +101,9 @@ class SimpleCRUD {
       if(searchedArray.length === 1) {
          return searchedArray[0];
       }
+      else if(!searchedArray.length) {
+         return undefined;
+      }
       return searchedArray;
    }
 
@@ -113,7 +116,7 @@ class SimpleCRUD {
       if(option === remove && !Array.isArray(updateProp))
          throw new Error(`You can only pass the array of properties' name when you choose option 'remove'`);
 
-      if(option !== set && option !== remove) throw new Error(`There is only 'set' and 'delete' options`);
+      if(option !== set && option !== remove) throw new Error(`There is only 'set' and 'remove' options`);
 
       //@ts-ignore
       if(option === set && updateProp.id) throw new Error(`You can not change the 'id'`);
@@ -231,9 +234,7 @@ class SimpleCRUD {
       if(!deleteProp) throw new Error(`You need to pass the id or required properties to delete`);
       let deletedObject: object | object[] = [];
       if(this.strictMode) {
-         for(const prop in deleteProp) {
-            if(prop !== 'id') throw new Error(`You can only delete the object by its id in strict mode`);
-         }
+         if(deleteProp['id']) throw new Error(`You can only delete the object by its 'id' in strict mode`);
          //@ts-ignore
          const index = this.containerArray.findIndex(arr => arr.id === deleteProp.id.toString());
          if(index === -1) return;
@@ -253,7 +254,7 @@ class SimpleCRUD {
             keys.forEach(key => {
                if(key === 'id') {
                   //@ts-ignore
-                  if(object.id.toString() === deletedProp.id.toString()) counter++;
+                  if(object.id.toString() === deleteProp.id.toString()) counter++;
                }
                else{
                   //@ts-ignore
