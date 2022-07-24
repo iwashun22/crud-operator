@@ -1,25 +1,25 @@
 # [crud-operator](https://www.npmjs.com/package/crud-operator) &middot; [![GitHub license](https://img.shields.io/badge/license-GNU-red.svg)](https://github.com/iwashun22/npm-simple-crud/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)](https://www.npmjs.com/package/crud-operator)
 
-A simple CRUD operator. Supported both types of commonJS and ES module.
+Usage: Make a simple CRUD.
 
 ## Installation
 
 ```sh
 # with npm
-npm install --save simple-crud
+npm install --save crud-operator
 # with yarn
-yarn add simple-crud
+yarn add crud-operator
 ```
 
 > commonJS
 ```js
-const crud = require('simple-crud');
+const crud = require('crud-operator');
 const users = new crud();
 ```
 
 > ES module
 ```js
-import crud from 'simple-crud';
+import crud from 'crud-operator';
 const users = new crud();
 ```
 
@@ -28,11 +28,11 @@ const users = new crud();
 ## Methods
 
 There are four methods, `create`, `read`, `update` and `delete`.
-I will give the code example starts from here.
+Down here is the example of some codes.
 These codes are when the `strictMode` is `false`
 
 ```js
-import crud from 'simple-crud';
+import crud from 'crud-operator';
 
 const users = new crud();
 ```
@@ -87,7 +87,7 @@ const users = new crud();
    ```
 
 - ### `update`
-   Update the object. You can pass any required properties when the option `strictMode` is `false`. You can change all the objects if the required properties match both of lower-case and upper-case. However, I recommend to use this method by passing `id`. 
+   Update the object. You can pass any required properties when the option `strictMode` is `false`. But better to use this method by passing `id`. 
 
    **Types**
 
@@ -103,7 +103,7 @@ const users = new crud();
 
    > **RETURN**
 
-   Nothing (void)
+   Nothing
 
    *emample*
    ```js
@@ -134,7 +134,7 @@ const users = new crud();
 ## Example code
 
 ```js
-import crud from 'simple-crud';
+import crud from 'crud-operator';
 
 // By default, strictMode is set to false.
 const users = new crud();
@@ -174,14 +174,14 @@ By default, it will contains `[ 'name', 'id' ]`. If you want to make a custom pr
 
 #### **`bad-example.js`**
 ```js
-import crud from 'simple-crud';
+import crud from 'crud-operator';
 
 const users = new crud(['message', 'name']); // error
 ```
 
 #### **`good-example.js`**
 ```js
-import crud from 'simple-crud';
+import crud from 'crud-operator';
 
 const users = new crud(['name', 'id', 'email']);
 
