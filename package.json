@@ -1,6 +1,6 @@
 {
   "name": "crud-operator",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "keywords": [
     "crud",
     "operator",
@@ -24,10 +24,10 @@
     "dev-build": "tsc -p ./ --declaration --watch"
   },
   "devDependencies": {
-    "@types/node": "^17.0.8",
-    "node-fetch": "2"
+    "@types/node": "^17.0.8"
   },
   "dependencies": {
-    "jest": "15.0.1"
+    "fetch": "^1.1.0",
+    "jest": "^28.1.3"
   }
 }

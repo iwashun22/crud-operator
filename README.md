@@ -218,16 +218,25 @@ You can provide the data what you already had, or the data you fetch. However, t
 
 *example*
 ```js
-let users;
+const Crud = require('crud-operator');
+const fetch = require('fetch').fetchUrl;
 
-async function fetchDataIntoCRUD(url){
-   const data = await fetch(url);
-   const json = await data.json();
-   users = await new crud(['name', 'id'], true, json);
+let items;
+
+function fetchDataIntoCRUD(url){
+   return new Promise((resolve, reject) => {
+      fetch(url, (error, meta, body) => {
+         resolve(decodeURI(body));
+      })
+   })
 }
 
 fetchDataIntoCRUD('https://jsonplaceholder.typicode.com/users')
-.then(() => {
-   console.log(users.read());
-})
+   .then((data) => {
+      const json = JSON.parse(data);
+      items = new Crud(['id', 'name'], true, json);
+   })
+   .then(() => {
+      console.log(items.read({ id: 3 }));
+   })
 ```

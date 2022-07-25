@@ -20,6 +20,7 @@ class SimpleCRUD {
       this.containerArray = [];
       this.strictMode = strictMode;
       if(defaultData) {
+         // console.log(typeof defaultData)
          defaultData.forEach(data => {
             for(const prop of this.requiredProps) {
                //@ts-ignore
