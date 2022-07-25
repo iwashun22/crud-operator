@@ -1,4 +1,4 @@
-# [crud-operator](https://www.npmjs.com/package/crud-operator) &middot; [![GitHub license](https://img.shields.io/badge/license-GNU-red.svg)](https://github.com/iwashun22/npm-simple-crud/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)](https://www.npmjs.com/package/crud-operator)
+# [crud-operator](https://www.npmjs.com/package/crud-operator) &middot; [![GitHub license](https://img.shields.io/badge/license-GNU-red.svg)](https://github.com/iwashun22/crud-operator/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)](https://www.npmjs.com/package/crud-operator)
 
 Usage: Make a simple CRUD.
 
@@ -38,7 +38,7 @@ const users = new crud();
 ```
 
 - ### `create`
-   Create new object by passing the required properties
+   Create new object by passing the required properties which is known as NEVER NULL value.
    (by default it will be `name` and `id`).
 
    > **NOTE**
