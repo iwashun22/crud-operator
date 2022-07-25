@@ -1,4 +1,4 @@
-# [crud-operator](https://www.npmjs.com/package/crud-operator) &middot; [![GitHub license](https://img.shields.io/badge/license-GNU-red.svg)](https://github.com/iwashun22/crud-operator/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)](https://www.npmjs.com/package/crud-operator)
+# [crud-operator](https://www.npmjs.com/package/crud-operator) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/iwashun22/crud-operator/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/crud-operator?style=flat)](https://www.npmjs.com/package/crud-operator)
 
 Usage: Make a simple CRUD.
 
